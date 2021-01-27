@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-mockjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "markdown-it mockjs",
   "main": "index.js",
   "scripts": {
