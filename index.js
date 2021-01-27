@@ -1,6 +1,6 @@
-var mockjs = require('mockjs')
+var Mockjs = require('mockjs')
 
-export function mockjs(md){
+module.exports = function mockjsPlugin(md) {
 
     function scan(state) {
         var i, blkIdx, inlineTokens;
@@ -11,7 +11,7 @@ export function mockjs(md){
           }
           if(state.tokens[blkIdx].type === 'fence' && state.tokens[blkIdx].tag==='code' && state.tokens[blkIdx].info==='mockjs'){
   
-            state.tokens[blkIdx].content = JSON.stringify(mockjs.mock(JSON.parse(state.tokens[blkIdx].content)));
+            state.tokens[blkIdx].content = JSON.stringify(Mockjs.mock(JSON.parse(state.tokens[blkIdx].content)));
             // state.tokens[blkIdx]=token
           }
           if(state.tokens[blkIdx].type === 'inline'){
@@ -21,7 +21,7 @@ export function mockjs(md){
                 continue;
                 }
                 if(/^@/.test(inlineTokens[i].content)){
-                  inlineTokens[i].content = mockjs.mock(inlineTokens[i].content);
+                  inlineTokens[i].content = Mockjs.mock(inlineTokens[i].content);
                 }
                 
             }
@@ -32,4 +32,3 @@ export function mockjs(md){
 
     md.core.ruler.push('mock', scan,['code','inline']);
 }
-export default mockjs
